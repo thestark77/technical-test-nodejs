@@ -14,7 +14,7 @@ Estás desarrollando una API para gestionar un sistema de tareas (To-Do List). L
 3. Crear una cuenta y autenticarse.
 4. Crear, leer, actualizar y eliminar tareas.
 5. Marcar tareas como completadas o pendientes.
-6. **Realiza varios commits a medida que vayas avanzando en el desarrollo de la prueba**
+6. **Realiza varios commits a medida que vayas avanzando en el desarrollo de la prueba (UTILIZA CONVENTIONAL COMMITS)**
 
 ## Requerimientos Técnicos
 
