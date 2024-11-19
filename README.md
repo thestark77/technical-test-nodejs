@@ -10,7 +10,7 @@ Tienes **2 horas** para completar la prueba. Asegúrate de documentar claramente
 ## Contexto
 Estás desarrollando una API para gestionar un sistema de tareas (To-Do List). Los usuarios pueden:
 1. Clona el siguiente repo en tu máquina: https://github.com/IT-Bemovil/technical-test-nodejs.git
-2. Crea una rama con tu nombre usando quebabcase ejemplo: **brian-maya**
+2. Crea una rama con tu nombre usando KEBABCASE ejemplo: **brian-maya**
 3. Crear una cuenta y autenticarse.
 4. Crear, leer, actualizar y eliminar tareas.
 5. Marcar tareas como completadas o pendientes.
