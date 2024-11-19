@@ -9,9 +9,12 @@ Tienes **2 horas** para completar la prueba. Asegúrate de documentar claramente
 
 ## Contexto
 Estás desarrollando una API para gestionar un sistema de tareas (To-Do List). Los usuarios pueden:
-1. Crear una cuenta y autenticarse.
-2. Crear, leer, actualizar y eliminar tareas.
-3. Marcar tareas como completadas o pendientes.
+1. Clona el siguiente repo en tu máquina: https://github.com/IT-Bemovil/technical-test-nodejs.git
+2. Crea una rama con tu nombre usando quebabcase ejemplo: **brian-maya**
+3. Crear una cuenta y autenticarse.
+4. Crear, leer, actualizar y eliminar tareas.
+5. Marcar tareas como completadas o pendientes.
+6. **Realiza varios commits a medida que vayas avanzando en el desarrollo de la prueba**
 
 ## Requerimientos Técnicos
 
@@ -149,7 +152,7 @@ Todos los endpoints de tareas requieren autenticación (JWT en el header).
 Se evaluará con base en los siguientes criterios:
 1. Correctitud funcional de los endpoints.
 2. Uso adecuado de las buenas prácticas en Node.js y Express.
-3. Organización y claridad del código.
+3. Organización y claridad del código. (SOLID, PATRONES DE DISEÑO, CLEAN CODE, DRY)
 4. Manejo de errores y validaciones.
 
 ---
