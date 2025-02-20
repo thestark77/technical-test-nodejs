@@ -34,13 +34,9 @@ export function safeParseValidation(schema, data) {
   const validation = schema.safeParse(data)
 
   if (!validation.success) {
-    return {
-      success: false,
-      formState: {
-        errors: validation.error.flatten().fieldErrors,
-        message: validation.error.errors[0].message || 'Invalid fields'
-      }
-    }
+    throw new Error('❌ Error validating data:', {
+      
+    })
   }
 
   return {
