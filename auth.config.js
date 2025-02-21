@@ -1,6 +1,9 @@
 import jwt from 'jsonwebtoken'
 import { ACCESS_TOKEN } from './utils/config.js'
 
+export const TokenExpiredError = jwt.TokenExpiredError
+export const JsonWebTokenError = jwt.JsonWebTokenError
+
 export function generateJWT(userId) {
   return jwt.sign({ userId }, ACCESS_TOKEN, {
     expiresIn: '1h'

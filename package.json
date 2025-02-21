@@ -1,10 +1,11 @@
 {
-  "name": "technical-test-nodejs",
+  "name": "technical-test-nodejs by Sebastián Flórez",
   "version": "1.0.0",
   "description": "Esta prueba tiene como objetivo evaluar tus habilidades prácticas en Node.js con Express. Se espera que desarrolles una solución que siga buenas prácticas, incluya validaciones, y demuestre tu experiencia en el manejo de APIs RESTful.",
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "start": "npx nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,8 +27,6 @@
     "express": "4.21.2",
     "jsonwebtoken": "9.0.2",
     "nodemon": "3.1.9",
-    "sequelize": "6.37.5",
-    "sqlite3": "5.1.7",
     "zod": "3.24.2"
   }
 }

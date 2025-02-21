@@ -4,7 +4,8 @@ import {
   ForeignKeyConstraintError,
   ValidationError,
   EmptyResultError
-} from 'sequelize'
+} from '@sequelize/core'
+import { TokenExpiredError, JsonWebTokenError } from '../auth.config.js'
 
 export function handleError({ error, message }) {
   const formState = {
@@ -12,7 +13,13 @@ export function handleError({ error, message }) {
     message: message || 'Unknown error'
   }
 
-  if (error instanceof ValidationFieldsError) {
+  if (
+    error instanceof TokenExpiredError ||
+    error instanceof JsonWebTokenError
+  ) {
+    formState.message = error.message
+    formState.status = 401
+  } else if (error instanceof ValidationFieldsError) {
     formState.message = error.message || error.description
     formState.errors = error.formState.errors
     formState.status = 400
@@ -48,7 +55,7 @@ export function handleError({ error, message }) {
 const errorsDictionary = {
   auth: {
     name: 'AuthError',
-    description: 'User is not authenticated'
+    description: 'Error on authentication'
   },
   validation: {
     name: 'ValidationFieldsError',
