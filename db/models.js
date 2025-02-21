@@ -1,5 +1,5 @@
-
 import dbClient from './client.js'
+import { DataTypes } from '@sequelize/core'
 
 const TASK_STATUSES = {
   PENDING: 'pending',
@@ -8,42 +8,39 @@ const TASK_STATUSES = {
 
 const Task = dbClient.define('task', {
   id: {
-    type: dbClient.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
   title: {
-    type: dbClient.DataTypes.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   },
   description: {
-    type: dbClient.DataTypes.STRING,
+    type: DataTypes.STRING,
     allowNull: true
   },
   status: {
-    type: dbClient.DataTypes.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   }
 })
 
 const User = dbClient.define('user', {
   id: {
-    type: dbClient.DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
   email: {
-    type: dbClient.DataTypes.STRING,
+    type: DataTypes.STRING,
+    unique: true,
     allowNull: false
   },
   password: {
-    type: dbClient.DataTypes.STRING,
+    type: DataTypes.STRING,
     allowNull: false
   }
 })
-
-(async () => {
-  await sequelize.sync({ force: true })
-})()
 
 export { Task, TASK_STATUSES, User }

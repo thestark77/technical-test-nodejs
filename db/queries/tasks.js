@@ -1,6 +1,6 @@
 import { Task, TASK_STATUSES } from '../models.js'
 
-export async function createTask({ title, description }) {
+export async function createTaskQuery({ title, description }) {
   return await Task.create({
     title,
     description,
@@ -8,18 +8,18 @@ export async function createTask({ title, description }) {
   })
 }
 
-export async function getTask({ id }) {
+export async function getTaskQuery({ id }) {
   return await Task.findOne({ where: { id } })
 }
 
-export async function updateTask({ id, title, description, status }) {
+export async function updateTaskQuery({ id, title, description, status }) {
   return await Task.update({ title, description, status }, { where: { id } })
 }
 
-export async function getAllTasks() {
+export async function getAllTasksQuery() {
   return await Task.findAll()
 }
 
-export async function deleteTask({ id }) {
+export async function deleteTaskQuery({ id }) {
   return await Task.destroy({ where: { id } })
 }

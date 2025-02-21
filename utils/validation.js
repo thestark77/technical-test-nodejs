@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { ValidationFieldsError } from './errorHandler.js'
 
 //User schemas
 const emailSchema = z.string().email()
@@ -15,12 +16,17 @@ export const authSchema = z.object({
   password: passwordSchema
 })
 
+export const getTaskByIdSchema = z.object({
+  id: idSchema
+})
+
 export const createTaskSchema = z.object({
   title: titleSchema,
-  description: descriptionSchema
+  description: descriptionSchema.optional()
 })
 
 export const uptateTaksSchema = z.object({
+  id: idSchema,
   title: titleSchema.optional(),
   description: descriptionSchema.optional(),
   status: statusSchema.optional()
@@ -30,17 +36,14 @@ export const deleteTaskSchema = z.object({
   id: idSchema
 })
 
-export function safeParseValidation(schema, data) {
-  const validation = schema.safeParse(data)
+export function validateObject({ schema, object }) {
+  const zodValidation = schema.safeParse(object)
 
-  if (!validation.success) {
-    throw new Error('❌ Error validating data:', {
-      
+  if (!zodValidation.success) {
+    throw new ValidationFieldsError({
+      errors: zodValidation.error.flatten().fieldErrors
     })
   }
 
-  return {
-    success: true,
-    data: validation.data
-  }
+  return zodValidation.data
 }

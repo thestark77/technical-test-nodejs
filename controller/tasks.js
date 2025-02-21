@@ -1,26 +1,113 @@
-import { safeParseValidation, createTaskSchema } from '../utils/validation.js'
+import {
+  validateObject,
+  getTaskByIdSchema,
+  createTaskSchema,
+  uptateTaksSchema,
+  deleteTaskSchema
+} from '../utils/validation.js'
+import {
+  createTaskQuery,
+  getTaskQuery,
+  updateTaskQuery,
+  getAllTasksQuery,
+  deleteTaskQuery
+} from '../db/queries/tasks.js'
+import { NotFoundError } from '../utils/errorHandler.js'
 
-function createTask(req, res) {
-  const { title, description } = req.body
-
-  const { title: validatedTitle, description: validatedDescription } =
-    safeParseValidation(createTaskSchema, { title, description })
+async function getAllTasks(req, res, next) {
+  try {
+    const tasks = await getAllTasksQuery()
+    res.status(200).json(tasks)
+  } catch (error) {
+    next(error)
+  }
 }
 
-function getAllTasks(req, res) {
-  
+async function getTask(req, res, next) {
+  try {
+    const { id } = req.params
+
+    const validatedId = validateObject({
+      schema: getTaskByIdSchema,
+      object: { id: Number(id) }
+    })
+
+    const task = await getTaskQuery({ id: validatedId.id })
+
+    if (!task) {
+      throw new NotFoundError('Task not found')
+    }
+
+    res.status(200).json(task)
+  } catch (error) {
+    next(error)
+  }
 }
 
-function getTask(req, res) {
+async function createTask(req, res, next) {
+  try {
+    const { title, description } = req.body
 
+    const { title: validatedTitle, description: validatedDescription } =
+      validateObject({
+        schema: createTaskSchema,
+        object: { title, description }
+      })
+
+    await createTaskQuery({
+      title: validatedTitle,
+      description: validatedDescription
+    })
+
+    res.status(201).json({ message: 'Task created successfully' })
+  } catch (error) {
+    next(error)
+  }
 }
 
-function updateTask(req, res) {
+async function updateTask(req, res, next) {
+  try {
+    const { id } = req.params
+    const { title, description, status } = req.body
 
+    const {
+      id: validatedId,
+      title: validatedTitle,
+      description: validatedDescription,
+      status: validatedStatus
+    } = validateObject({
+      schema: uptateTaksSchema,
+      object: { id: Number(id), title, description, status }
+    })
+
+    await updateTaskQuery({
+      id: validatedId,
+      title: validatedTitle,
+      description: validatedDescription,
+      status: validatedStatus
+    })
+
+    res.status(200).json({ message: 'Task updated successfully' })
+  } catch (error) {
+    next(error)
+  }
 }
 
-function deleteTask(req, res) {
+async function deleteTask(req, res, next) {
+  try {
+    const { id } = req.params
 
+    const validatedId = validateObject({
+      schema: deleteTaskSchema,
+      object: { id: Number(id) }
+    })
+
+    await deleteTaskQuery({ id: validatedId.id })
+
+    res.status(200).json({ message: 'Task deleted successfully' })
+  } catch (error) {
+    next(error)
+  }
 }
 
 export { createTask, getTask, getAllTasks, updateTask, deleteTask }

@@ -1,9 +1,9 @@
 import { User } from '../models.js'
 
-export async function registerUser({ email, password }) {
+export async function createUserQuery({ email, password }) {
   return await User.create({ email, password })
 }
 
-export async function getUserEmailAndPass({ email }) {
+export async function getUserByEmailQuery(email) {
   return await User.findOne({ where: { email } })
 }

@@ -8,7 +8,7 @@ const dbClient = new Sequelize({
 
 try {
   await dbClient.authenticate()
-  console.log('Connection has been established successfully.')
+  console.log('Successfully conected to the database')
 } catch (error) {
   console.error('Unable to connect to the database:', error)
 }

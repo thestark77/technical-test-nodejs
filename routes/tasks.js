@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { authenticateUser } from '../auth.config.js'
 import {
   createTask,
   getTask,
@@ -8,6 +9,7 @@ import {
 } from '../controller/tasks.js'
 
 const tasksRouter = Router()
+tasksRouter.use(authenticateUser)
 
 tasksRouter.get('/', getAllTasks)
 tasksRouter.get('/:id', getTask)
